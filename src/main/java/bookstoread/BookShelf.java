@@ -1,9 +1,6 @@
 package bookstoread;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class BookShelf {
 
@@ -30,4 +27,9 @@ public class BookShelf {
         */
     }
 
+    public List<String> arrangeBooksByTitle() {
+        List<String> booksArrangerdByTitle = new ArrayList<>(books);
+        booksArrangerdByTitle.sort(Comparator.naturalOrder());
+        return Collections.unmodifiableList(booksArrangerdByTitle);
+    }
 }

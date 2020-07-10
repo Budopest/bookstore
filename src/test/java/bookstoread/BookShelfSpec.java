@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class BookShelfSpec {
@@ -54,6 +55,24 @@ public class BookShelfSpec {
         catch (Exception e){
             assertTrue(e instanceof UnsupportedOperationException, () -> "Should throw UnsupportedOperationException.");
         }
-
     }
+
+    @Test
+    public void booksShelfArrangedByTitle(){
+        shelf.addBooksToShelf("JAVA unit testing with Junit5","MYSQL Fundementals","JAVA the complete refrence");
+        List<String> books = shelf.arrangeBooksByTitle();
+        assertEquals(Arrays.asList("JAVA the complete refrence","JAVA unit testing with Junit5","MYSQL Fundementals"),books,
+                ()->"Books should be arranged lexicographically by book title");
+    }
+
+    @Test
+    public void booksShelfIsInInsertionOrderAfterCallingArrange(){
+        shelf.addBooksToShelf("JAVA unit testing with Junit5","MYSQL Fundementals","JAVA the complete refrence");
+        List<String> books = shelf.arrangeBooksByTitle();
+        books = shelf.getAllBooksInShelf();
+        assertEquals(Arrays.asList("JAVA unit testing with Junit5","MYSQL Fundementals","JAVA the complete refrence"),books,
+                ()->"Books should be in insertion order even after arrange when getAllBooksInShelf is called");
+    }
+
+
 }
