@@ -1,7 +1,7 @@
 package bookstoread;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -16,8 +16,19 @@ public class BookShelfSpec {
         * We perform assertions to verify if expected behavior is correct.
         * */
         BookShelf shelf = new BookShelf();
-        List<String> books = shelf.books();
+        List<String> books = shelf.getAllBooksInShelf();
         assertTrue(books.isEmpty(),()->"BookShelf should be empty");
+
+    }
+
+    @Test
+    public void bookShelfContainsThreeBooksWhenThreeBooksAdded(){
+
+        BookShelf shelf = new BookShelf();
+        shelf.addBookToShelf("JAVA the complete refrence");
+        shelf.addBookToShelf("JAVA unit testing with Junit5","MYSQL Fundementals");
+        List<String> books = shelf.getAllBooksInShelf();
+        assertEquals(3,books.size(),()->"There should be three books in the shelf");
 
     }
 }
