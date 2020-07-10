@@ -25,10 +25,33 @@ public class BookShelfSpec {
     public void bookShelfContainsThreeBooksWhenThreeBooksAdded(){
 
         BookShelf shelf = new BookShelf();
-        shelf.addBookToShelf("JAVA the complete refrence");
-        shelf.addBookToShelf("JAVA unit testing with Junit5","MYSQL Fundementals");
+        shelf.addBooksToShelf("JAVA the complete refrence");
+        shelf.addBooksToShelf("JAVA unit testing with Junit5","MYSQL Fundementals");
         List<String> books = shelf.getAllBooksInShelf();
         assertEquals(3,books.size(),()->"There should be three books in the shelf");
+
+    }
+
+    @Test
+    public void bookShelfEmptyWhenNoBokksAdded(){
+
+        BookShelf shelf = new BookShelf();
+        List<String> books = shelf.getAllBooksInShelf();
+        assertTrue(books.isEmpty(),()-> "Bookshelf should be empty");
+
+    }
+
+    @Test
+    public void booksListunmodifiable(){
+        BookShelf shelf = new BookShelf();
+        List<String> books = shelf.getAllBooksInShelf();
+        try{
+        books.add("12 Rules for life");
+        fail(()->"Adding books to the list directly should be illegal");
+        }
+        catch (Exception e){
+            assertTrue(e instanceof UnsupportedOperationException, () -> "Should throw UnsupportedOperationException.");
+        }
 
     }
 }

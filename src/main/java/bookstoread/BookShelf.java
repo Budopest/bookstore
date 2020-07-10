@@ -13,10 +13,10 @@ public class BookShelf {
         books = new ArrayList<String>();
     }
     List<String> getAllBooksInShelf(){
-        return books;
+        return Collections.unmodifiableList(books);
     }
-    public void addBookToShelf(String... bookNames){
-        
+    public void addBooksToShelf(String... bookNames){
+
         Arrays.stream(bookNames).forEach(books::add);
         /*
         Replace lambda with method refrence
