@@ -1,6 +1,7 @@
 package bookstoread;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +15,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+@DisplayName("Book Shelf")
+@ExtendWith(BookParameterResolver.class)
 public class BookShelfSpec {
 
     private BookShelf shelf;
@@ -23,12 +26,12 @@ public class BookShelfSpec {
     private Book cleanCode;
 
     @BeforeEach
-    public void init() throws Exception{
+    public void init(Map<String,Book> books) throws Exception{
         shelf = new BookShelf();
-        effectiveJava = new Book("Effective Java", "Joshua Bloch", LocalDate.of(2008, Month.MAY, 8));
-        codeComplete = new Book("Code Complete", "Steve McConnel", LocalDate.of(2004, Month.JUNE, 9));
-        mythicalManMonth = new Book("The Mythical Man-Month", "Frederick Phillips Brooks", LocalDate.of(1975, Month.JANUARY, 1));
-        cleanCode = new Book("Clean Code", "Robert C. Martin", LocalDate.of(2008, Month.AUGUST, 1));
+        this.effectiveJava = books.get("Effective Java");
+        this.codeComplete = books.get("Code Complete");
+        this.mythicalManMonth = books.get("The Mythical Man-Month");
+        this.cleanCode = books.get("Clean Code");
     }
 
     @Nested
