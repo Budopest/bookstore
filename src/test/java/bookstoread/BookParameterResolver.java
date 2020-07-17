@@ -23,6 +23,10 @@ public class BookParameterResolver implements ParameterResolver {
 
     @Override
     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        ExtensionContext.Store books = extensionContext.getStore(ExtensionContext.Namespace.create(Book.class));
+        return books.getOrComputeIfAbsent("bookList",(key)->getBooks());
+    }
+    Map<String, Book> getBooks(){
         Map<String, Book> books = new HashMap<>();
         books.put("Effective Java", new Book("Effective Java", "Joshua Bloch", LocalDate.of(2008, Month.MAY, 8)));
         books.put("Code Complete", new Book("Code Complete", "Steve McConnel", LocalDate.of(2004, Month.JUNE, 9)));
@@ -32,3 +36,6 @@ public class BookParameterResolver implements ParameterResolver {
         return books;
     }
 }
+
+
+
